@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eleições Brasil 2026</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0f172a;
+    color: #fff;
+}
+
+header {
+    background: linear-gradient(135deg, #0ea5e9, #1e3a8a);
+    padding: 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+}
+
+header p {
+    margin-top: 10px;
+    opacity: .9;
+}
+
+nav {
+    background: #111827;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid #334155;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 5px 0;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+.hero {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    max-width: 800px;
+    margin: auto;
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
+    transition: .3s;
+    border: 1px solid #334155;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: #334155;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #38bdf8;
+}
+
+.card p {
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.resultados {
+    padding: 40px;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.resultados h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    color: #94a3b8;
+    margin-bottom: 25px;
+}
+
+.totais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.total-card {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+.total-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.total-card .numero {
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+.total-card .percentual {
+    color: #cbd5e1;
+    margin-top: 5px;
+}
+
+.lula {
+    color: #f43f5e;
+}
+
+.flavio {
+    color: #38bdf8;
+}
+
+.barra {
+    display: flex;
+    width: 100%;
+    height: 18px;
+    background: #334155;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0 35px;
+}
+
+.barra-lula {
+    width: 25.10%;
+    background: #e11d48;
+}
+
+.barra-flavio {
+    width: 74.90%;
+    background: #0284c7;
+}
+
+.legenda {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: #cbd5e1;
+    font-size: .9rem;
+}
+
+.tabela-container {
+    overflow-x: auto;
+    background: #1e293b;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 550px;
+}
+
+th {
+    background: #0284c7;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+td, th {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
+
+td:first-child, th:first-child {
+    text-align: left;
+}
+
+tbody tr:hover {
+    background: #334155;
+}
+
+.total-row {
+    font-weight: bold;
+    background: #0f172a;
+}
+
+.regiao {
+    margin-top: 40px;
+    font-size: 1.4rem;
+    color: #38bdf8;
+}
+
+.aviso {
+    margin-top: 25px;
+    padding: 15px;
+    border-left: 4px solid #0ea5e9;
+    background: #1e293b;
+    border-radius: 6px;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+footer {
+    background: #111827;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 50px;
+    color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    nav {
+        position: relative;
+        line-height: 2;
+    }
+
+    nav a {
+        margin: 0 8px;
+        font-size: .9rem;
+    }
+
+    .cards, .resultados {
+        padding: 20px;
+    }
+
+    .total-card .numero {
+        font-size: 2.2rem;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header id="inicio">
+    <h1>🇧🇷 Eleições AnonymousBrasil 2026</h1>
+    <p>Acompanhe notícias, pesquisas, candidatos e resultados.</p>
+</header>
+
+<nav>
+    <a href="#inicio">Início</a>
+    <a href="#candidatos">Candidatos</a>
+    <a href="#pesquisas">Pesquisas</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#noticias">Notícias</a>
+</nav>
+
+<section class="hero">
+    <h2>Central de Informações Eleitorais</h2>
+    <p>
+        Cobertura das eleições brasileiras de 2026 com dados,
+        análises, gráficos e resultados da votação no Brasil e no exterior.
+    </p>
+</section>
+
+<section class="cards">
+    <div class="card" id="candidatos">
+        <h3>🗳️ Candidatos</h3>
+        <p>Perfil dos candidatos e histórico político.</p>
+    </div>
+
+
+<div class="card" id="pesquisas">
+    <h3>📊 Pesquisas</h3>
+    <p>Acompanhe pesquisas eleitorais.</p>
+</div>
+
+<div class="card" id="noticias">
+    <h3>📰 Notícias</h3>
+    <p>Últimas notícias da campanha eleitoral.</p>
+</div>
+
+<div class="card">
+    <h3>🌎 Voto no Exterior</h3>
+    <p>Resultados e estatísticas dos eleitores brasileiros no exterior.</p>
+</div>
+
+</section>
+
+<section class="resultados" id="resultados">
+
+
+<h2>🌎 Resultados da Votação no Exterior</h2>
+<p class="subtitulo">
+    Votação por país • Dados conforme a imagem de resultados fornecida
+</p>
+
+<div class="totais">
+
+    <div class="total-card">
+        <h3 class="lula">Lula (PT)</h3>
+        <div class="numero lula">23.992</div>
+        <div class="percentual">25,10% dos votos exibidos</div>
+    </div>
+
+    <div class="total-card">
+        <h3 class="flavio">Flávio Bolsonaro (PL)</h3>
+        <div class="numero flavio">71.601</div>
+        <div class="percentual">74,90% dos votos exibidos</div>
+    </div>
+
+</div>
+
+<div class="barra">
+    <div class="barra-lula"></div>
+    <div class="barra-flavio"></div>
+</div>
+
+<div class="legenda">
+    <span>🟥 Lula (PT) — 25,10%</span>
+    <span>🟦 Flávio Bolsonaro (PL) — 74,90%</span>
+</div>
+
+<h3 class="regiao">🌏 Oceania, Ásia e Oriente Médio</h3>
+
+<div class="tabela-container">
+    <table>
+        <thead>
+            <tr>
+                <th>País</th>
+                <th>Lula (PT)</th>
+                <th>Flávio Bolsonaro (PL)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>🇳🇿 Nova Zelândia</td><td class="lula">234</td><td class="flavio">64</td></tr>
+            <tr><td>🇦🇺 Austrália</td><td class="lula">4.562</td><td class="flavio">2.579</td></tr>
+            <tr><td>🇯🇵 Japão</td><td class="lula">5.234</td><td class="flavio">24.601</td></tr>
+            <tr><td>🇰🇷 Coreia do Sul</td><td class="lula">123</td><td class="flavio">72</td></tr>
+            <tr><td>🇨🇳 China Continental</td><td class="lula">268</td><td class="flavio">98</td></tr>
+            <tr><td>🇸🇬 Singapura</td><td class="lula">190</td><td class="flavio">92</td></tr>
+            <tr><td>🇲🇾 Malásia</td><td class="lula">44</td><td class="flavio">27</td></tr>
+            <tr><td>🇵🇭 Filipinas</td><td class="lula">26</td><td class="flavio">33</td></tr>
+            <tr><td>🇹🇭 Tailândia</td><td class="lula">60</td><td class="flavio">48</td></tr>
+            <tr><td>🇮🇩 Indonésia</td><td class="lula">20</td><td class="flavio">12</td></tr>
+            <tr><td>🇻🇳 Vietnã</td><td class="lula">7</td><td class="flavio">11</td></tr>
+            <tr><td>🇮🇳 Índia</td><td class="lula">6</td><td class="flavio">18</td></tr>
+            <tr><td>🇦🇪 Emirados Árabes</td><td class="lula">249</td><td class="flavio">610</td></tr>
+            <tr><td>🇸🇦 Arábia Saudita</td><td class="lula">142</td><td class="flavio">248</td></tr>
+            <tr><td>🇶🇦 Catar</td><td class="lula">36</td><td class="flavio">104</td></tr>
+            <tr><td>🇹🇷 Turquia</td><td class="lula">198</td><td class="flavio">353</td></tr>
+            <tr><td>🇮🇱 Israel</td><td class="lula">52</td><td class="flavio">407</td></tr>
+            <tr><td>🇮🇷 Irã</td><td class="lula">3</td><td class="flavio">7</td></tr>
+            <tr><td>🇱🇧 Líbano</td><td class="lula">29</td><td class="flavio">104</td></tr>
+            <tr><td>🇯🇴 Jordânia</td><td class="lula">17</td><td class="flavio">47</td></tr>
+            <tr><td>🇰🇼 Kuwait</td><td class="lula">22</td><td class="flavio">76</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 class="regiao">🌎 Américas, Europa e África</h3>
+
+<div class="tabela-container">
+    <table>
+        <thead>
+            <tr>
+                <th>País</th>
+                <th>Lula (PT)</th>
+                <th>Flávio Bolsonaro (PL)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>🇺🇸 Estados Unidos</td><td class="lula">1.847</td><td class="flavio">3.660</td></tr>
+            <tr><td>🇨🇦 Canadá</td><td class="lula">356</td><td class="flavio">1.102</td></tr>
+            <tr><td>🇲🇽 México</td><td class="lula">104</td><td class="flavio">291</td></tr>
+            <tr><td>🇦🇷 Argentina</td><td class="lula">519</td><td class="flavio">4.125</td></tr>
+            <tr><td>🇨🇱 Chile</td><td class="lula">321</td><td class="flavio">2.423</td></tr>
+            <tr><td>🇺🇾 Uruguai</td><td class="lula">138</td><td class="flavio">1.174</td></tr>
+            <tr><td>🇵🇾 Paraguai</td><td class="lula">90</td><td class="flavio">745</td></tr>
+            <tr><td>🇧🇴 Bolívia</td><td class="lula">77</td><td class="flavio">421</td></tr>
+            <tr><td>🇨🇴 Colômbia</td><td class="lula">453</td><td class="flavio">1.892</td></tr>
+            <tr><td>🇵🇪 Peru</td><td class="lula">258</td><td class="flavio">1.334</td></tr>
+            <tr><td>🇪🇨 Equador</td><td class="lula">96</td><td class="flavio">583</td></tr>
+            <tr><td>🇻🇪 Venezuela</td><td class="lula">56</td><td class="flavio">402</td></tr>
+            <tr><td>🇿🇦 África do Sul</td><td class="lula">129</td><td class="flavio">421</td></tr>
+            <tr><td>🇬🇧 Reino Unido</td><td class="lula">1.036</td><td class="flavio">3.487</td></tr>
+            <tr><td>🇮🇪 Irlanda</td><td class="lula">68</td><td class="flavio">298</td></tr>
+            <tr><td>🇫🇷 França</td><td class="lula">990</td><td class="flavio">2.887</td></tr>
+            <tr><td>🇩🇪 Alemanha</td><td class="lula">817</td><td class="flavio">2.756</td></tr>
+            <tr><td>🇮🇹 Itália</td><td class="lula">744</td><td class="flavio">2.468</td></tr>
+            <tr><td>🇪🇸 Espanha</td><td class="lula">757</td><td class="flavio">2.301</td></tr>
+            <tr><td>🇵🇹 Portugal</td><td class="lula">1.180</td><td class="flavio">3.995</td></tr>
+            <tr><td>🇨🇭 Suíça</td><td class="lula">432</td><td class="flavio">1.640</td></tr>
+            <tr><td>🌐 Outros países</td><td class="lula">1.678</td><td class="flavio">4.912</td></tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</section>
+
+<footer>
+    © 2026 Daniel Fraga Eleições Brasil • Página informativa sobre resultados eleitorais.
+</footer>
+
+</body>
+</html>
